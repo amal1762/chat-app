@@ -1,0 +1,17 @@
+# Go binaries
+/server
+*.exe
+*.out
+*.test
+
+# Vendor & modules
+/vendor/
+go.sum
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+
+# Docker
+*.env
