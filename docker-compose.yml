@@ -3,10 +3,33 @@ version: '3.8'
 services:
   app:
     build: .
+    container_name: golang
     ports:
-      - "3000:3000"
-    volumes:
-      - .:/app
+      - "8000:8000"
     environment:
-      - PORT=3000
+      - PORT=8000
     restart: unless-stopped
+    env_file:
+      - .env
+  
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: chatuser
+      POSTGRES_PASSWORD: chatpass
+      POSTGRES_DB: chatdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
