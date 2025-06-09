@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  app:
+    build: .
+    container_name: golang
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+    restart: unless-stopped
+    env_file:
+      - .env
   
   postgres:
     image: postgres:15-alpine
